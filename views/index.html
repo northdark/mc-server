@@ -1,0 +1,64 @@
+{% extends './layout.html' %}
+{% block self_css %}
+<style>
+    #output{
+        margin-top: 5px;
+    }
+    #output>pre{
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="输入命令" id="instruction"/>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="go">Go!</button>
+                  </span>
+            </div>
+            <div id="output">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div id="input">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block self_script %}
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+    function sendInstruction(){
+        if(!!$('#instruction').val().trim()){
+            $('#input').prepend($('<pre>').text($('#instruction').val().trim()));
+            socket.emit('input-default-instruction',$('#instruction').val().trim());
+            $('#instruction').val('');
+        }else{
+            alert('不能为空');
+        }
+    }
+    $(function(){
+        socket.on('output-default-instruction',function(msg){
+            $('#output').prepend($('<pre>').text(msg));
+        });
+        $(document).keydown(function(enent){
+            if(event.keyCode==13){
+                sendInstruction();
+            }
+        });
+        setInterval(function () {
+            socket.emit('ping');
+        },5000);
+    });
+    $('#go').on('click',function(){
+        sendInstruction();
+    })
+
+</script>
+{% endblock %}

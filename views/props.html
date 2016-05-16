@@ -1,0 +1,36 @@
+
+{% extends './layout.html' %}
+{% block self_css %}
+{% endblock %}
+{% block content %}
+<pre>
+    java -Xincgc -Xmx1G -jar craftbukkit-1.0.1-R1.jar
+
+其中"-xmx1g"是java启动时设置最大使用内存的参数，可以参照上面的玩家与占用内存的关系表来修改。
+
+    server.properties
+
+level-name 服务器地图文件夹的名称
+allow-nether 开启地狱 true为开启，false关闭
+view-distance 可视距离
+spawn-monsters 刷怪 true为开启，false关闭
+online-mode 只有在线玩家可以进游戏 true为开启，false关闭
+gamemode 游戏模式 0生存1创造
+spawn-animals 刷动物 true为开启，false关闭
+difficulty 难度等级 0和平1简单2中等3困难
+server-name 服务器名
+pvp 玩家可以伤害玩家 true为开启，false关闭
+server-ip 服务器IP地址，留空
+max-players 最大玩家数量
+level-seed自动生成地图的时候使用的种子
+server-port 服务器端口号，默认25565，改为其他端口的时候进游戏时需要使用服务器IP:端口号的形式
+allow-flight 允许玩家飞行(需要玩家自己装CJB或者飞行披风MOD)
+white-list 白名单
+motd 服务器信条，就是在添加服务器后显示的那个- -
+netstat -tulp|grep java
+如果启动成功，你可以看到java和其对应端口号。
+</pre>
+
+{% endblock %}
+{% block self_script %}
+{% endblock %}

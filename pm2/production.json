@@ -1,0 +1,17 @@
+{
+  "apps": [
+    {
+      "name": "mc-server",
+      "script": "app.js",
+      "args": [],
+      "log_date_format": "YYYY-MM-DD HH:mm Z",
+      "error_file": "mbox-be-err.log",
+      "out_file": "mbox-be-out.log",
+      "node_args": "--harmony",
+      "cwd": ".",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}
