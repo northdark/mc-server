@@ -36,7 +36,6 @@
     var socket = io();
     function sendInstruction(){
         if(!!$('#instruction').val().trim()){
-            $('#input').prepend($('<pre>').text($('#instruction').val().trim()));
             socket.emit('input-default-instruction',$('#instruction').val().trim());
             $('#instruction').val('');
         }else{
