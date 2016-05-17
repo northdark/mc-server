@@ -18,9 +18,14 @@ var sendMsgToWebSocketClient = function(data){
     }
 };
 
+var sendInputResponseToWebSocketClient = function(data){
+    if(!!socket){
+        socket.emit('input-default-instruction-res',data.toString());
+    }
+};
+
 exports.register = function (io) {
     client.connect(8889, '127.0.0.1', function() {
-        console.log('Connected');
         io.on('connection', function (_socket) {
             socket = _socket;
             socket.on('disconnect', function () {
@@ -30,6 +35,7 @@ exports.register = function (io) {
             });
             socket.on('input-default-instruction',function(msg){
                 sendMsgToServer(msg);
+                sendInputResponseToWebSocketClient(msg)
             })
         });
     });

@@ -47,7 +47,10 @@
         socket.on('output-default-instruction',function(msg){
             $('#output').prepend($('<pre>').text(msg));
         });
-        $(document).keydown(function(enent){
+        socket.on('input-default-instruction-res',function(msg){
+            $('#input').prepend($('<pre>').text(msg));
+        })
+        $(document).keydown(function(event){
             if(event.keyCode==13){
                 sendInstruction();
             }
