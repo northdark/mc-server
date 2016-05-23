@@ -19,10 +19,14 @@ var more = function*() {
 var hechengbiao = function*() {
     this.body = yield render('hechengbiao', {});
 };
+var zuobiao = function *() {
+    this.body = yield render('zuobiao', {});
+}
 exports.register = function (router) {
     router.get('/', homePage);
     router.get('/props', props);
     router.get('/1_8', p1_8);
     router.get('/more', more);
     router.get('/hechengbiao', hechengbiao);
+    router.get('/zuobiao', zuobiao);
 };
